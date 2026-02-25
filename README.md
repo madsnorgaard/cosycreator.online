@@ -4,7 +4,7 @@ WordPress site running on Docker with Traefik reverse proxy, MySQL 8, and phpMyA
 
 ## Stack
 
-- **WordPress** 6.7.1 on Docker
+- **WordPress** 6.9.1 on PHP 8.4 (Docker)
 - **MySQL** 8.4
 - **phpMyAdmin** for database management
 - **Traefik v2** for SSL termination and routing
