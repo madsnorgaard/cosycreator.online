@@ -23,7 +23,7 @@ services:
       - traefik.enable=false
 
    cosycreator_phpmyadmin:
-     image: phpmyadmin/phpmyadmin
+     image: phpmyadmin/phpmyadmin:5.2
      restart: always
      environment:
        PMA_HOST: cosycreator_db
@@ -45,7 +45,7 @@ services:
    cosycreator_wordpress:
      depends_on:
        - cosycreator_db
-     image: wordpress:6.7.1
+     image: wordpress:php8.4-apache
      restart: always
      environment:
        WORDPRESS_DB_HOST: cosycreator.online_db
@@ -67,6 +67,24 @@ services:
      networks:
        - internal
        - web
+
+   cli:
+     image: wordpress:cli-php8.4
+     container_name: ${WORDPRESS_DOMAIN}_cli
+     env_file: .env
+     environment:
+       WORDPRESS_DB_HOST: cosycreator.online_db
+       WORDPRESS_DB_USER: "${MYSQL_USER}"
+       WORDPRESS_DB_PASSWORD: "${MYSQL_PASSWORD}"
+       WORDPRESS_DB_NAME: "${MYSQL_DATABASE}"
+     volumes:
+       - ./wp-content:/var/www/html/wp-content
+     networks:
+       - internal
+     depends_on:
+       - cosycreator_db
+     profiles:
+       - cli
 
 volumes:
     db_data: {}
