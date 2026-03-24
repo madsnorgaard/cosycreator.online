@@ -67,11 +67,12 @@ onMounted(() => {
   color: var(--pink);
 }
 
-.cursor--active {
-  transform: scale(0.85) !important;
-}
-
 .cursor svg {
   filter: drop-shadow(0 0 4px currentColor);
+  transition: transform var(--transition);
+}
+
+.cursor--active svg {
+  transform: scale(0.8);
 }
 </style>

@@ -29,15 +29,10 @@
         iPad artist. Digital worlds, one pixel at a time.
       </p>
 
-      <div class="hero-actions">
-        <a href="#gallery" class="hero-cta" data-hover>
-          VIEW WORK
-          <span class="hero-cta__arrow">↓</span>
-        </a>
-        <a href="#about" class="hero-secondary mono" data-hover>
-          ABOUT AURORA
-        </a>
-      </div>
+      <a href="#gallery" class="hero-cta" data-hover>
+        VIEW WORK
+        <span class="hero-cta__arrow">↓</span>
+      </a>
     </div>
 
     <!-- Scroll indicator -->
@@ -196,16 +191,7 @@
   max-width: 28ch;
 }
 
-/* ── Actions ── */
-.hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-top: 0.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
+/* ── CTA ── */
 .hero-cta {
   display: inline-flex;
   align-items: center;
@@ -237,21 +223,6 @@
 @keyframes bob {
   0%, 100% { transform: translateY(0); }
   50%       { transform: translateY(3px); }
-}
-
-.hero-secondary {
-  color: var(--text-muted);
-  font-size: 0.6875rem;
-  letter-spacing: 0.1em;
-  text-decoration: none;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 2px;
-  transition: color var(--transition), border-color var(--transition);
-}
-
-.hero-secondary:hover {
-  color: var(--text);
-  border-color: var(--purple);
 }
 
 /* ── Scroll hint ── */

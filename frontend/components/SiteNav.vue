@@ -8,14 +8,7 @@
         <span class="nav-logo__full mono">COSY CREATOR</span>
       </a>
 
-      <!-- Status + links -->
-      <div class="nav-right">
-        <span class="nav-status mono">
-          <span class="nav-status__dot blink">●</span>
-          COMMISSIONS OPEN
-        </span>
-        <a href="#about" class="nav-link mono" data-hover>ABOUT</a>
-      </div>
+      <a href="#about" class="nav-link mono" data-hover>ABOUT</a>
     </div>
   </nav>
 </template>
