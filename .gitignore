@@ -31,3 +31,9 @@ wp-content/updraft/
 wp-content/oci/
 wp-content/disabled_plugins/
 wp-content/upgrade-temp-backup/
+
+# Nuxt frontend build artifacts
+frontend/.nuxt/
+frontend/.output/
+frontend/node_modules/
+frontend/.env.local

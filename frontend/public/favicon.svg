@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="4" fill="#0c0a14"/>
+  <!-- Outer ring -->
+  <rect x="4" y="4" width="24" height="24" rx="2" fill="none" stroke="#a855f7" stroke-width="1"/>
+  <!-- Crosshair -->
+  <line x1="16" y1="4"  x2="16" y2="11" stroke="#a855f7" stroke-width="2"/>
+  <line x1="16" y1="21" x2="16" y2="28" stroke="#a855f7" stroke-width="2"/>
+  <line x1="4"  y1="16" x2="11" y2="16" stroke="#a855f7" stroke-width="2"/>
+  <line x1="21" y1="16" x2="28" y2="16" stroke="#a855f7" stroke-width="2"/>
+  <!-- Centre -->
+  <rect x="14" y="14" width="4" height="4" fill="#f472b6"/>
+</svg>
