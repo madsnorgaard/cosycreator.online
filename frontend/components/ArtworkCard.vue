@@ -4,7 +4,7 @@
     :class="{ 'card--no-image': !artwork.imageUrl }"
     data-hover
     tabindex="0"
-    :aria-label="`${artwork.title} — ${categoryName}`"
+    :aria-label="`${artwork.title} - ${categoryName}`"
     @click="$emit('open', artwork)"
     @keydown.enter="$emit('open', artwork)"
     @keydown.space.prevent="$emit('open', artwork)"

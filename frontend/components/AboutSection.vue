@@ -7,7 +7,7 @@
         <p class="about-label mono">ABOUT</p>
         <h2 class="about-name">Aurora</h2>
         <p class="about-desc">
-          Digital artist. Icons, illustrations, and game UI graphics —
+          Digital artist. Icons, illustrations, and game UI graphics -
           all made on iPad.
         </p>
 

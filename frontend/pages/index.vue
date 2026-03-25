@@ -31,11 +31,11 @@ if (catData.value)  categories.value = catData.value
 if (artData.value)  artworks.value   = artData.value
 
 useHead({
-  title: 'Cosy Creator — Icons · Illustrations · Game UI',
+  title: 'Cosy Creator - Icons · Illustrations · Game UI',
   meta: [
     {
       name: 'description',
-      content: 'Digital art studio by Aurora. Icons, illustrations, game UI and loading screens — made on iPad.',
+      content: 'Digital art studio by Aurora. Icons, illustrations, game UI and loading screens - made on iPad.',
     },
     { property: 'og:title',       content: 'Cosy Creator' },
     { property: 'og:description', content: 'Digital art studio. Icons · Illustrations · Game UI.' },
