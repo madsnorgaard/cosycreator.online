@@ -19,6 +19,7 @@ export default defineEventHandler(async (event) => {
       imageAlt: (doc.image?.alt || doc.title) as string,
       width: (doc.image?.width ?? null) as number | null,
       height: (doc.image?.height ?? null) as number | null,
+      description: (doc.description ?? null) as string | null,
     }))
   } catch {
     return []

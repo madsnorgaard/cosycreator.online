@@ -35,7 +35,10 @@
           <!-- Meta -->
           <div class="modal-meta">
             <span v-if="categoryName" class="tag tag--purple modal-cat">{{ categoryName }}</span>
-            <h2 class="modal-title">{{ artwork.title }}</h2>
+            <div class="modal-text">
+              <h2 class="modal-title">{{ artwork.title }}</h2>
+              <p v-if="artwork.description" class="modal-desc">{{ artwork.description }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -175,11 +178,24 @@ onMounted(() => {
   font-size: 0.5625rem;
 }
 
+.modal-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
 .modal-title {
   font-size: 1rem;
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.01em;
+}
+
+.modal-desc {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.5;
 }
 
 /* ── Transition ── */

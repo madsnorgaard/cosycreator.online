@@ -14,4 +14,5 @@ export interface Artwork {
   imageAlt: string
   width?: number | null
   height?: number | null
+  description?: string | null
 }

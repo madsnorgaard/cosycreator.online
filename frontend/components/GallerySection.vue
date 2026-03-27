@@ -17,7 +17,7 @@
         <div class="gallery-empty__inner">
           <span class="gallery-empty__icon">✦</span>
           <p>nothing here yet</p>
-          <p class="gallery-empty__sub">Upload artwork via the WP admin panel to populate the gallery.</p>
+          <p class="gallery-empty__sub">Upload artwork via cms.cosycreator.online to populate the gallery.</p>
         </div>
       </div>
 

@@ -13,7 +13,7 @@
       </button>
 
       <button
-        v-for="cat in categories"
+        v-for="cat in categoriesWithCount"
         :key="cat.id"
         class="filter-btn"
         :class="{ 'filter-btn--active': activeCategory === cat.id }"
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-const { categories, artworks, activeCategory, setCategory } = usePayload()
+const { categoriesWithCount, artworks, activeCategory, setCategory } = usePayload()
 </script>
 
 <style scoped>

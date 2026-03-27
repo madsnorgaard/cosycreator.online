@@ -11,6 +11,13 @@ export const usePayload = () => {
     return artworks.value.filter(a => a.categoryIds.includes(activeCategory.value!))
   })
 
+  const categoriesWithCount = computed(() =>
+    categories.value.map(c => ({
+      ...c,
+      count: artworks.value.filter(a => a.categoryIds.includes(c.id)).length,
+    })),
+  )
+
   const setCategory = (id: string | null) => {
     activeCategory.value = id
   }
@@ -18,6 +25,7 @@ export const usePayload = () => {
   return {
     artworks,
     categories,
+    categoriesWithCount,
     filteredArtworks,
     activeCategory,
     loading,
