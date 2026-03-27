@@ -1,5 +1,6 @@
 import { buildConfig } from 'payload/config'
 import { webpackBundler } from '@payloadcms/bundler-webpack'
+import { slateEditor } from '@payloadcms/richtext-slate'
 import Artworks from './collections/Artworks'
 import Categories from './collections/Categories'
 import Media from './collections/Media'
@@ -7,6 +8,8 @@ import Users from './collections/Users'
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3001',
+
+  editor: slateEditor({}),
 
   admin: {
     bundler: webpackBundler(),
