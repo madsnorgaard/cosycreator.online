@@ -1,6 +1,9 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+ARG PAYLOAD_PUBLIC_SERVER_URL=https://cms.cosycreator.online
+ENV PAYLOAD_PUBLIC_SERVER_URL=$PAYLOAD_PUBLIC_SERVER_URL
+
 COPY package.json ./
 RUN npm install --legacy-peer-deps
 

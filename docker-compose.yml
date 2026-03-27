@@ -20,6 +20,8 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+      args:
+        PAYLOAD_PUBLIC_SERVER_URL: https://cms.${SITE_DOMAIN}
     image: cosycreator-payload:latest
     container_name: ${SITE_DOMAIN}_payload
     restart: always
