@@ -6,13 +6,10 @@
         :class="{ 'filter-btn--active': activeCategory === null }"
         role="tab"
         :aria-selected="activeCategory === null"
-        data-hover
         @click="setCategory(null)"
       >
-        <span class="filter-btn__bracket">[</span>
-        ALL
-        <span class="filter-btn__count mono">{{ artworks.length }}</span>
-        <span class="filter-btn__bracket">]</span>
+        all
+        <span class="filter-btn__count">{{ artworks.length }}</span>
       </button>
 
       <button
@@ -22,13 +19,10 @@
         :class="{ 'filter-btn--active': activeCategory === cat.id }"
         role="tab"
         :aria-selected="activeCategory === cat.id"
-        data-hover
         @click="setCategory(cat.id)"
       >
-        <span class="filter-btn__bracket">[</span>
-        {{ cat.name.toUpperCase() }}
-        <span class="filter-btn__count mono">{{ cat.count }}</span>
-        <span class="filter-btn__bracket">]</span>
+        {{ cat.name.toLowerCase() }}
+        <span class="filter-btn__count">{{ cat.count }}</span>
       </button>
     </div>
   </div>
@@ -43,65 +37,63 @@ const { categories, artworks, activeCategory, setCategory } = useWordPress()
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding-bottom: 2px; /* prevent clipping */
+  padding-bottom: 2px;
 }
 .filter-wrap::-webkit-scrollbar { display: none; }
 
 .filter-bar {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   width: max-content;
   min-width: 100%;
 }
 
-/* ── Filter button ── */
+/* ── Filter button — pill style ── */
 .filter-btn {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 0.45rem 0.875rem;
-  background: transparent;
+  gap: 6px;
+  padding: 0.4rem 1rem;
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-pill);
   color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   white-space: nowrap;
   transition: all var(--transition);
+  cursor: pointer;
 }
 
 .filter-btn:hover {
-  border-color: rgba(168, 85, 247, 0.4);
-  color: var(--text);
-  background: rgba(168, 85, 247, 0.06);
+  border-color: var(--lavender);
+  color: var(--lavender-dim);
+  background: rgba(196, 160, 224, 0.08);
 }
 
 .filter-btn--active {
-  border-color: var(--purple);
-  color: var(--text);
-  background: rgba(168, 85, 247, 0.12);
-  box-shadow: 0 0 12px rgba(168, 85, 247, 0.15);
-}
-
-.filter-btn--active .filter-btn__bracket {
-  color: var(--purple);
-}
-
-.filter-btn__bracket {
-  color: var(--text-dim);
-  transition: color var(--transition);
+  border-color: var(--lavender);
+  color: var(--lavender-dim);
+  background: rgba(196, 160, 224, 0.15);
+  box-shadow: var(--shadow-sm);
 }
 
 .filter-btn__count {
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
   color: var(--text-dim);
+  background: var(--bg-2);
+  padding: 1px 6px;
+  border-radius: var(--radius-pill);
   min-width: 1.5ch;
+  text-align: center;
 }
 
 .filter-btn--active .filter-btn__count {
-  color: var(--text-muted);
+  background: rgba(196, 160, 224, 0.2);
+  color: var(--lavender-dim);
 }
 </style>

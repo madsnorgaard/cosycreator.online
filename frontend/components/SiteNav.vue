@@ -2,13 +2,13 @@
   <nav class="nav" :class="{ 'nav--scrolled': scrolled }">
     <div class="nav-inner">
       <!-- Logo -->
-      <a href="#" class="nav-logo" data-hover>
-        <span class="nav-logo__cc">CC</span>
+      <a href="#" class="nav-logo">
+        <span class="nav-logo__cc">cc</span>
         <span class="nav-logo__dot">·</span>
-        <span class="nav-logo__full mono">COSY CREATOR</span>
+        <span class="nav-logo__full">cosy creator</span>
       </a>
 
-      <a href="#about" class="nav-link mono" data-hover>ABOUT</a>
+      <a href="#about" class="nav-link">about</a>
     </div>
   </nav>
 </template>
@@ -31,7 +31,7 @@ const scrolled = computed(() => scrollY.value > 60)
 }
 
 .nav--scrolled {
-  background: rgba(12, 10, 20, 0.85);
+  background: rgba(253, 248, 243, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom-color: var(--border);
@@ -55,10 +55,8 @@ const scrolled = computed(() => scrollY.value > 60)
 
 .nav-logo__cc {
   font-size: 1.125rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--purple);
-  text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  font-weight: 800;
+  color: var(--lavender-dim);
 }
 
 .nav-logo__dot {
@@ -67,43 +65,24 @@ const scrolled = computed(() => scrollY.value > 60)
 
 .nav-logo__full {
   color: var(--text-muted);
-  font-size: 0.6875rem;
-  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
 
-  /* Hide on small screens */
   @media (max-width: 480px) { display: none; }
 }
 
-/* ── Right side ── */
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.nav-status {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  color: var(--text-muted);
-  font-size: 0.6875rem;
-  letter-spacing: 0.1em;
-}
-
-.nav-status__dot {
-  color: var(--teal);
-  font-size: 0.625rem;
-}
-
+/* ── Nav link ── */
 .nav-link {
   color: var(--text-muted);
-  font-size: 0.6875rem;
-  letter-spacing: 0.1em;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-decoration: none;
   transition: color var(--transition);
 }
 
 .nav-link:hover {
-  color: var(--text);
+  color: var(--lavender-dim);
 }
 </style>

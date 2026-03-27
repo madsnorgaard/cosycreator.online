@@ -1,44 +1,51 @@
 <template>
   <section class="hero">
-    <!-- Aurora background layers -->
+    <!-- Soft background blobs -->
     <div class="hero-bg" aria-hidden="true">
-      <div class="hero-orb hero-orb--purple" />
-      <div class="hero-orb hero-orb--pink" />
-      <div class="hero-orb hero-orb--teal" />
-      <div class="hero-scanlines" />
+      <div class="hero-blob hero-blob--lavender" />
+      <div class="hero-blob hero-blob--blush" />
+      <div class="hero-blob hero-blob--mint" />
     </div>
 
-    <!-- Corner brackets (decorative) -->
-    <span class="hcorner hcorner--tl" aria-hidden="true" />
-    <span class="hcorner hcorner--br" aria-hidden="true" />
+    <!-- Decorative sparkles -->
+    <span class="sparkle sparkle--1" aria-hidden="true">✦</span>
+    <span class="sparkle sparkle--2" aria-hidden="true">✦</span>
+    <span class="sparkle sparkle--3" aria-hidden="true">✧</span>
 
     <!-- Content -->
     <div class="hero-content">
-      <p class="hero-label mono">DIGITAL ART STUDIO</p>
+      <p class="hero-label">digital art studio</p>
 
       <h1 class="hero-title">
-        <span class="hero-title__line1">COSY</span>
-        <span class="hero-title__line2">CREATOR</span>
+        <span class="hero-title__line1">cosy</span>
+        <span class="hero-title__line2">creator</span>
       </h1>
 
-      <p class="hero-tagline mono">
-        ICONS&nbsp;&nbsp;·&nbsp;&nbsp;ILLUSTRATIONS&nbsp;&nbsp;·&nbsp;&nbsp;GAME&nbsp;UI
+      <p class="hero-tagline">
+        icons&nbsp;·&nbsp;illustrations&nbsp;·&nbsp;game ui
       </p>
 
       <p class="hero-sub">
         iPad artist. Digital worlds, one pixel at a time.
       </p>
 
-      <a href="#gallery" class="hero-cta" data-hover>
-        VIEW WORK
+      <a href="#gallery" class="hero-cta">
+        see my work
         <span class="hero-cta__arrow">↓</span>
       </a>
     </div>
 
     <!-- Scroll indicator -->
     <div class="hero-scroll" aria-hidden="true">
-      <span class="mono">SCROLL</span>
+      <span class="hero-scroll__text">scroll</span>
       <span class="hero-scroll__line" />
+    </div>
+
+    <!-- Wavy bottom divider -->
+    <div class="hero-wave" aria-hidden="true">
+      <svg viewBox="0 0 1440 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,36 C180,72 360,0 540,36 C720,72 900,8 1080,36 C1260,64 1380,24 1440,36 L1440,72 L0,72 Z" fill="var(--bg)"/>
+      </svg>
     </div>
   </section>
 </template>
@@ -52,84 +59,67 @@
   justify-content: center;
   overflow: hidden;
   padding-top: 5rem;
+  background: linear-gradient(160deg, #fdf0f8 0%, #fdf8f3 55%, #eef0fd 100%);
 }
 
-/* ── Aurora background ── */
+/* ── Soft background blobs (no glow, just tinted) ── */
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: var(--bg);
-}
-
-.hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.18;
-  animation: orb-drift 12s ease-in-out infinite alternate;
-}
-
-.hero-orb--purple {
-  width: 60vw; height: 60vw;
-  max-width: 700px; max-height: 700px;
-  top: -15%; left: -10%;
-  background: radial-gradient(circle, var(--purple), transparent 70%);
-  animation-delay: 0s;
-}
-
-.hero-orb--pink {
-  width: 50vw; height: 50vw;
-  max-width: 600px; max-height: 600px;
-  top: -20%; right: -5%;
-  background: radial-gradient(circle, var(--pink), transparent 70%);
-  animation-delay: -4s;
-  opacity: 0.14;
-}
-
-.hero-orb--teal {
-  width: 40vw; height: 40vw;
-  max-width: 500px; max-height: 500px;
-  bottom: -10%; left: 30%;
-  background: radial-gradient(circle, var(--teal), transparent 70%);
-  animation-delay: -8s;
-  opacity: 0.1;
-}
-
-@keyframes orb-drift {
-  from { transform: translate(0, 0) scale(1); }
-  to   { transform: translate(3%, 4%) scale(1.08); }
-}
-
-.hero-scanlines {
-  position: absolute;
-  inset: 0;
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.08) 2px,
-    rgba(0, 0, 0, 0.08) 4px
-  );
   pointer-events: none;
 }
 
-/* ── Corner brackets ── */
-.hcorner {
+.hero-blob {
   position: absolute;
-  width: 48px;
-  height: 48px;
-  opacity: 0.3;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.22;
+  animation: blob-drift 14s ease-in-out infinite alternate;
 }
-.hcorner--tl {
-  top: 6rem; left: clamp(1.5rem, 5vw, 4rem);
-  border-top: 1px solid var(--purple);
-  border-left: 1px solid var(--purple);
+
+.hero-blob--lavender {
+  width: 55vw; height: 55vw;
+  max-width: 640px; max-height: 640px;
+  top: -15%; left: -8%;
+  background: radial-gradient(circle, var(--lavender), transparent 70%);
+  animation-delay: 0s;
 }
-.hcorner--br {
-  bottom: 6rem; right: clamp(1.5rem, 5vw, 4rem);
-  border-bottom: 1px solid var(--purple);
-  border-right: 1px solid var(--purple);
+
+.hero-blob--blush {
+  width: 45vw; height: 45vw;
+  max-width: 540px; max-height: 540px;
+  top: -20%; right: -5%;
+  background: radial-gradient(circle, var(--blush), transparent 70%);
+  animation-delay: -5s;
 }
+
+.hero-blob--mint {
+  width: 35vw; height: 35vw;
+  max-width: 420px; max-height: 420px;
+  bottom: 10%; left: 35%;
+  background: radial-gradient(circle, var(--mint), transparent 70%);
+  animation-delay: -9s;
+  opacity: 0.15;
+}
+
+@keyframes blob-drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(2%, 3%) scale(1.06); }
+}
+
+/* ── Sparkles ── */
+.sparkle {
+  position: absolute;
+  color: var(--lavender);
+  font-size: 1rem;
+  pointer-events: none;
+  user-select: none;
+  animation: float 3s ease-in-out infinite;
+}
+
+.sparkle--1 { top: 22%; left: 12%; font-size: 1.25rem; animation-delay: 0s; color: var(--lavender); }
+.sparkle--2 { top: 30%; right: 14%; font-size: 0.875rem; animation-delay: -1.5s; color: var(--blush); }
+.sparkle--3 { bottom: 28%; left: 22%; font-size: 0.75rem; animation-delay: -0.8s; color: var(--mint); }
 
 /* ── Content ── */
 .hero-content {
@@ -145,9 +135,10 @@
 
 .hero-label {
   color: var(--text-muted);
-  font-size: 0.6875rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: lowercase;
 }
 
 .hero-title {
@@ -158,28 +149,23 @@
 }
 
 .hero-title__line1 {
-  font-size: clamp(4.5rem, 18vw, 16rem);
-  letter-spacing: 0.18em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--purple);
-  text-stroke: 1.5px var(--purple);
-  text-shadow: 0 0 80px rgba(168, 85, 247, 0.25);
+  font-size: clamp(4rem, 17vw, 14rem);
+  letter-spacing: 0.06em;
+  color: var(--lavender-dim);
+  font-weight: 800;
 }
 
 .hero-title__line2 {
-  font-size: clamp(4.5rem, 18vw, 16rem);
-  letter-spacing: 0.18em;
-  background: linear-gradient(135deg, var(--purple) 30%, var(--pink) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  text-shadow: none;
-  filter: drop-shadow(0 0 40px rgba(244, 114, 182, 0.3));
+  font-size: clamp(4rem, 17vw, 14rem);
+  letter-spacing: 0.06em;
+  color: var(--blush-dim);
+  font-weight: 800;
 }
 
 .hero-tagline {
-  font-size: 0.6875rem;
-  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   color: var(--text-muted);
   margin-top: 0.25rem;
 }
@@ -196,23 +182,23 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 0.65rem 1.75rem;
-  background: linear-gradient(135deg, var(--purple-dim), var(--purple));
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  border-radius: var(--radius);
+  padding: 0.7rem 2rem;
+  background: var(--lavender);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-pill);
   transition: all var(--transition);
-  box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.4), var(--glow-purple);
+  box-shadow: var(--shadow-sm);
+  margin-top: 0.25rem;
 }
 
 .hero-cta:hover {
-  background: linear-gradient(135deg, var(--purple), var(--pink));
-  box-shadow: 0 0 0 1px rgba(244, 114, 182, 0.4), var(--glow-pink);
+  background: var(--lavender-dim);
   transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .hero-cta__arrow {
@@ -228,28 +214,49 @@
 /* ── Scroll hint ── */
 .hero-scroll {
   position: absolute;
-  bottom: 2rem;
+  bottom: 4.5rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   color: var(--text-dim);
-  font-size: 0.5625rem;
-  letter-spacing: 0.2em;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
   z-index: 1;
+}
+
+.hero-scroll__text {
+  text-transform: lowercase;
 }
 
 .hero-scroll__line {
   width: 1px;
-  height: 32px;
-  background: linear-gradient(to bottom, var(--text-dim), transparent);
+  height: 28px;
+  background: linear-gradient(to bottom, var(--border), transparent);
   animation: scroll-line 2s ease-in-out infinite;
 }
 
 @keyframes scroll-line {
-  0%, 100% { opacity: 0.3; transform: scaleY(1); transform-origin: top; }
-  50%       { opacity: 0.8; }
+  0%, 100% { opacity: 0.4; transform: scaleY(1); transform-origin: top; }
+  50%       { opacity: 0.9; }
+}
+
+/* ── Wave divider ── */
+.hero-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  line-height: 0;
+  z-index: 2;
+}
+
+.hero-wave svg {
+  width: 100%;
+  height: 72px;
+  display: block;
 }
 </style>

@@ -4,19 +4,19 @@
       <div class="divider" />
 
       <div class="about-bio">
-        <p class="about-label mono">ABOUT</p>
+        <p class="about-label">about</p>
         <h2 class="about-name">Aurora</h2>
         <p class="about-desc">
-          Digital artist. Icons, illustrations, and game UI graphics -
+          Digital artist. Icons, illustrations, and game UI graphics —
           all made on iPad.
         </p>
 
         <div class="about-formats">
-          <p class="about-formats__label mono">EXPORT FORMATS</p>
+          <p class="about-formats__label">export formats</p>
           <div class="about-formats__tags">
-            <span class="tag">PNG</span>
-            <span class="tag">SVG</span>
-            <span class="tag">GIF</span>
+            <span class="tag tag--lavender">PNG</span>
+            <span class="tag tag--blush">SVG</span>
+            <span class="tag tag--mint">GIF</span>
             <span class="tag">PDF</span>
             <span class="tag">PSD</span>
           </div>
@@ -44,15 +44,16 @@
 }
 
 .about-label {
-  color: var(--text-muted);
-  font-size: 0.6875rem;
-  letter-spacing: 0.25em;
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
 }
 
 .about-name {
   font-size: clamp(2.5rem, 6vw, 4rem);
-  letter-spacing: -0.02em;
-  background: linear-gradient(135deg, var(--purple), var(--pink));
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, var(--lavender-dim) 20%, var(--blush-dim) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -67,8 +68,9 @@
 
 .about-formats__label {
   color: var(--text-dim);
-  font-size: 0.625rem;
-  letter-spacing: 0.2em;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   margin-bottom: 0.5rem;
 }
 

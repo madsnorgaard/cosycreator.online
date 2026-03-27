@@ -1,50 +1,52 @@
 /* ============================================================
    COSY CREATOR — Design System
-   Aurora-gamer aesthetic: deep purple, hot pink, teal glow
+   Soft pastel kawaii aesthetic: warm cream, lavender, blush
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap');
 
 /* ── Variables ─────────────────────────────────────────────── */
 :root {
   /* Backgrounds */
-  --bg:          #0c0a14;
-  --bg-2:        #11101a;
-  --surface:     #1a1630;
-  --surface-2:   #221f3a;
+  --bg:          #fdf8f3;
+  --bg-2:        #f7f0e8;
+  --surface:     #fffaf7;
+  --surface-2:   #ffeee8;
 
   /* Borders */
-  --border:      #2d2756;
-  --border-glow: rgba(168, 85, 247, 0.35);
+  --border:      #e8d5c8;
+  --border-soft: rgba(196, 160, 224, 0.3);
 
-  /* Accents */
-  --purple:      #a855f7;
-  --purple-dim:  #7c3aed;
-  --pink:        #f472b6;
-  --pink-dim:    #db2777;
-  --teal:        #2dd4bf;
-  --gold:        #fbbf24;
+  /* Accents — pastel only, no neon */
+  --lavender:     #c4a0e0;
+  --lavender-dim: #a87dc8;
+  --blush:        #f0a5c0;
+  --blush-dim:    #d98aaa;
+  --mint:         #a8d5c2;
+  --peach:        #f5c4a0;
+  --sky:          #a8c8e8;
 
   /* Text */
-  --text:        #f0eeff;
-  --text-muted:  #7c6f9a;
-  --text-dim:    #3d3560;
+  --text:        #5c4a3a;
+  --text-muted:  #9a8070;
+  --text-dim:    #c8b5a8;
 
   /* Type */
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+  --font-display: 'Nunito', system-ui, sans-serif;
+  --font-mono:    'Nunito', system-ui, sans-serif;
 
-  /* Misc */
-  --radius:      4px;
-  --radius-md:   8px;
-  --radius-lg:   12px;
+  /* Shape */
+  --radius:      8px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-pill: 100px;
   --transition:  0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Glow shadows */
-  --glow-purple: 0 0 30px rgba(168, 85, 247, 0.25);
-  --glow-pink:   0 0 30px rgba(244, 114, 182, 0.25);
-  --glow-teal:   0 0 30px rgba(45, 212, 191, 0.2);
+  /* Soft shadows (no glow) */
+  --shadow-sm: 0 2px 8px rgba(92, 74, 58, 0.08);
+  --shadow-md: 0 4px 16px rgba(92, 74, 58, 0.12);
+  --shadow-lg: 0 8px 32px rgba(92, 74, 58, 0.16);
 }
 
 /* ── Reset ─────────────────────────────────────────────────── */
@@ -68,28 +70,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hide default cursor on pointer-fine devices (we use custom cursor) */
-@media (pointer: fine) {
-  html, * { cursor: none !important; }
-}
-
 /* ── Selection ─────────────────────────────────────────────── */
 ::selection {
-  background: rgba(168, 85, 247, 0.4);
+  background: rgba(196, 160, 224, 0.35);
   color: var(--text);
 }
 
 /* ── Scrollbar ─────────────────────────────────────────────── */
-::-webkit-scrollbar          { width: 4px; }
-::-webkit-scrollbar-track    { background: var(--bg); }
-::-webkit-scrollbar-thumb    { background: var(--border); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--purple); }
+::-webkit-scrollbar          { width: 6px; }
+::-webkit-scrollbar-track    { background: var(--bg-2); }
+::-webkit-scrollbar-thumb    { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--lavender); }
 
 /* ── Typography ────────────────────────────────────────────── */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1.05;
+  font-weight: 800;
+  line-height: 1.1;
   letter-spacing: -0.01em;
 }
 
@@ -103,44 +100,44 @@ img {
   max-width: 100%;
 }
 
-/* ── Mono utility ──────────────────────────────────────────── */
+/* ── Label utility (replaces mono) ─────────────────────────── */
 .mono {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: 0.8125em;
-  letter-spacing: 0.05em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 /* ── Tag / badge ───────────────────────────────────────────── */
 .tag {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 2px 8px;
-  border-radius: var(--radius);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--border);
   color: var(--text-muted);
   background: var(--surface);
   white-space: nowrap;
 }
 
-.tag--purple {
-  border-color: rgba(168, 85, 247, 0.4);
-  color: #c084fc;
-  background: rgba(168, 85, 247, 0.1);
+.tag--lavender {
+  border-color: rgba(196, 160, 224, 0.5);
+  color: var(--lavender-dim);
+  background: rgba(196, 160, 224, 0.12);
 }
 
-.tag--pink {
-  border-color: rgba(244, 114, 182, 0.4);
-  color: #f9a8d4;
-  background: rgba(244, 114, 182, 0.1);
+.tag--blush {
+  border-color: rgba(240, 165, 192, 0.5);
+  color: var(--blush-dim);
+  background: rgba(240, 165, 192, 0.12);
 }
 
-.tag--teal {
-  border-color: rgba(45, 212, 191, 0.4);
-  color: #5eead4;
-  background: rgba(45, 212, 191, 0.1);
+.tag--mint {
+  border-color: rgba(168, 213, 194, 0.5);
+  color: #7ab89e;
+  background: rgba(168, 213, 194, 0.15);
 }
 
 /* ── Page transitions ──────────────────────────────────────── */
@@ -148,8 +145,8 @@ img {
 .page-leave-active {
   transition: opacity var(--transition-slow), transform var(--transition-slow);
 }
-.page-enter-from { opacity: 0; transform: translateY(12px); }
-.page-leave-to   { opacity: 0; transform: translateY(-8px); }
+.page-enter-from { opacity: 0; transform: translateY(10px); }
+.page-leave-to   { opacity: 0; transform: translateY(-6px); }
 
 /* ── Divider ───────────────────────────────────────────────── */
 .divider {
@@ -181,18 +178,11 @@ img {
 
 .blink { animation: blink 1.2s step-end infinite; }
 
-/* ── Aurora background animation ──────────────────────────── */
-@keyframes aurora-shift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
 /* ── Fade-in for staggered gallery ────────────────────────── */
 @keyframes card-in {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -200,15 +190,15 @@ img {
   }
 }
 
-/* ── Scan-line overlay (hero only) ────────────────────────── */
-@keyframes scan {
-  from { background-position: 0 0; }
-  to   { background-position: 0 100%; }
+/* ── Float animation for decorative elements ──────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
 }
 
 /* ── Accessible focus ──────────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid var(--purple);
+  outline: 2px solid var(--lavender);
   outline-offset: 3px;
   border-radius: var(--radius);
 }

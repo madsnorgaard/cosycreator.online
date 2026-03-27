@@ -1,31 +1,23 @@
 <template>
   <Transition name="loading">
     <div v-if="visible" class="loading-screen" aria-hidden="true">
-      <!-- Corner brackets -->
-      <span class="corner corner--tl" />
-      <span class="corner corner--tr" />
-      <span class="corner corner--bl" />
-      <span class="corner corner--br" />
-
       <div class="loading-inner">
-        <p class="loading-studio mono">// STUDIO ASSETS</p>
+        <div class="loading-dots">
+          <span v-for="i in 3" :key="i" class="loading-dot" :style="{ animationDelay: `${(i - 1) * 0.2}s` }" />
+        </div>
 
         <h1 class="loading-title">
-          <span class="loading-title__cc">COSY</span>
-          <span class="loading-title__sep"> </span>
-          <span class="loading-title__creator">CREATOR</span>
+          <span class="loading-title__cosy">cosy</span>
+          <span class="loading-title__creator">creator</span>
         </h1>
 
         <div class="loading-bar-wrap">
           <div class="loading-bar">
             <div class="loading-bar__fill" :style="{ width: `${progress}%` }" />
           </div>
-          <span class="mono loading-percent">{{ Math.floor(progress) }}%</span>
         </div>
 
-        <p class="loading-status mono">
-          <span class="blink">█</span>&nbsp;{{ statusLabel }}
-        </p>
+        <p class="loading-status">{{ statusLabel }}</p>
       </div>
     </div>
   </Transition>
@@ -36,10 +28,10 @@ const visible = ref(true)
 const progress = ref(0)
 
 const steps = [
-  { label: 'INITIALISING_CANVAS...', target: 30,  delay: 0 },
-  { label: 'LOADING_ASSETS...',      target: 65,  delay: 400 },
-  { label: 'RENDERING_PIXELS...',    target: 88,  delay: 750 },
-  { label: 'STUDIO_READY',           target: 100, delay: 1050 },
+  { label: 'getting cosy...',   target: 30,  delay: 0 },
+  { label: 'loading artwork...', target: 65,  delay: 400 },
+  { label: 'almost ready!',     target: 88,  delay: 750 },
+  { label: 'welcome ✦',         target: 100, delay: 1050 },
 ]
 
 const statusLabel = ref(steps[0].label)
@@ -48,7 +40,6 @@ onMounted(() => {
   steps.forEach(({ label, target, delay }) => {
     setTimeout(() => {
       statusLabel.value = label
-      // Animate progress to target over ~200ms
       const start = progress.value
       const diff  = target - start
       const step  = diff / 12
@@ -60,7 +51,6 @@ onMounted(() => {
     }, delay)
   })
 
-  // Hide after bar completes + brief pause
   setTimeout(() => { visible.value = false }, 1600)
 })
 </script>
@@ -70,25 +60,12 @@ onMounted(() => {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: var(--bg);
+  background: linear-gradient(160deg, #fdf0f8 0%, #fdf8f3 55%, #eef0fd 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 
-/* ── Animated corner brackets ── */
-.corner {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-}
-.corner--tl { top: 24px; left: 24px;  border-top: 1px solid var(--purple); border-left: 1px solid var(--purple); }
-.corner--tr { top: 24px; right: 24px; border-top: 1px solid var(--purple); border-right: 1px solid var(--purple); }
-.corner--bl { bottom: 24px; left: 24px;  border-bottom: 1px solid var(--purple); border-left: 1px solid var(--purple); }
-.corner--br { bottom: 24px; right: 24px; border-bottom: 1px solid var(--purple); border-right: 1px solid var(--purple); }
-
-/* ── Inner content ── */
 .loading-inner {
   display: flex;
   flex-direction: column;
@@ -97,66 +74,73 @@ onMounted(() => {
   text-align: center;
 }
 
-.loading-studio {
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
+/* ── Bouncing dots ── */
+.loading-dots {
+  display: flex;
+  gap: 8px;
 }
 
+.loading-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lavender);
+  animation: dot-bounce 0.8s ease-in-out infinite alternate;
+}
+
+.loading-dot:nth-child(2) { background: var(--blush); }
+.loading-dot:nth-child(3) { background: var(--mint); }
+
+@keyframes dot-bounce {
+  from { transform: translateY(0); opacity: 0.6; }
+  to   { transform: translateY(-8px); opacity: 1; }
+}
+
+/* ── Title ── */
 .loading-title {
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
   line-height: 1;
+  letter-spacing: 0.04em;
+  display: flex;
+  gap: 0.3em;
 }
 
-.loading-title__cc {
-  color: var(--purple);
-  text-shadow: 0 0 60px rgba(168, 85, 247, 0.7), 0 0 120px rgba(168, 85, 247, 0.3);
+.loading-title__cosy {
+  color: var(--lavender-dim);
 }
 
 .loading-title__creator {
-  color: var(--pink);
-  text-shadow: 0 0 60px rgba(244, 114, 182, 0.7), 0 0 120px rgba(244, 114, 182, 0.3);
+  color: var(--blush-dim);
 }
 
 /* ── Progress bar ── */
 .loading-bar-wrap {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  width: clamp(240px, 40vw, 400px);
+  width: clamp(200px, 35vw, 320px);
 }
 
 .loading-bar {
-  flex: 1;
-  height: 3px;
+  width: 100%;
+  height: 6px;
   background: var(--border);
-  border-radius: 2px;
+  border-radius: var(--radius-pill);
   overflow: hidden;
 }
 
 .loading-bar__fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--purple), var(--pink));
-  border-radius: 2px;
+  background: linear-gradient(90deg, var(--lavender), var(--blush));
+  border-radius: var(--radius-pill);
   transition: width 0.1s linear;
-  box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
 }
 
-.loading-percent {
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  min-width: 3ch;
-  text-align: right;
-}
-
-/* ── Status label ── */
+/* ── Status ── */
 .loading-status {
   color: var(--text-muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  min-height: 1.2em;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  min-height: 1.4em;
 }
 
 /* ── Transition ── */

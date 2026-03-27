@@ -2,7 +2,6 @@
   <article
     class="card"
     :class="{ 'card--no-image': !artwork.imageUrl }"
-    data-hover
     tabindex="0"
     :aria-label="`${artwork.title} - ${categoryName}`"
     @click="$emit('open', artwork)"
@@ -20,24 +19,20 @@
         decoding="async"
       />
       <div v-else class="card-placeholder">
-        <span class="mono">NO PREVIEW</span>
+        <span>✦</span>
       </div>
 
-      <!-- HUD Overlay on hover -->
+      <!-- Hover overlay -->
       <div class="card-overlay">
         <div class="card-overlay__inner">
-          <span v-if="categoryName" class="card-overlay__cat tag tag--purple">
+          <span v-if="categoryName" class="card-overlay__cat tag tag--lavender">
             {{ categoryName }}
           </span>
           <p class="card-overlay__title">{{ artwork.title }}</p>
-          <span class="card-overlay__cta mono">→ VIEW</span>
+          <span class="card-overlay__cta">view →</span>
         </div>
       </div>
     </div>
-
-    <!-- Corner brackets (CSS) -->
-    <span class="card-corner card-corner--tl" aria-hidden="true" />
-    <span class="card-corner card-corner--br" aria-hidden="true" />
   </article>
 </template>
 
@@ -61,7 +56,7 @@ const categoryName = computed(() => {
 <style scoped>
 .card {
   position: relative;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--surface);
@@ -70,18 +65,19 @@ const categoryName = computed(() => {
     border-color var(--transition),
     box-shadow   var(--transition),
     transform    var(--transition);
+  cursor: pointer;
 }
 
 .card:focus-visible {
-  outline: 2px solid var(--purple);
+  outline: 2px solid var(--lavender);
   outline-offset: 3px;
 }
 
 .card:hover,
 .card:focus-visible {
-  border-color: rgba(168, 85, 247, 0.5);
-  box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.15), var(--glow-purple);
-  transform: translateY(-3px);
+  border-color: rgba(196, 160, 224, 0.6);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
 }
 
 /* ── Image ── */
@@ -100,7 +96,7 @@ const categoryName = computed(() => {
 }
 
 .card:hover .card-img {
-  transform: scale(1.06);
+  transform: scale(1.05);
 }
 
 /* ── Placeholder ── */
@@ -112,8 +108,7 @@ const categoryName = computed(() => {
   justify-content: center;
   background: var(--surface-2);
   color: var(--text-dim);
-  font-size: 0.625rem;
-  letter-spacing: 0.1em;
+  font-size: 1.5rem;
 }
 
 /* ── Hover overlay ── */
@@ -122,9 +117,9 @@ const categoryName = computed(() => {
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(8, 6, 18, 0.92) 0%,
-    rgba(8, 6, 18, 0.5)  40%,
-    transparent          70%
+    rgba(92, 74, 58, 0.85) 0%,
+    rgba(92, 74, 58, 0.4)  40%,
+    transparent            70%
   );
   display: flex;
   align-items: flex-end;
@@ -160,40 +155,14 @@ const categoryName = computed(() => {
 .card-overlay__title {
   font-size: 0.875rem;
   font-weight: 700;
-  color: var(--text);
+  color: #fff;
   line-height: 1.2;
-  letter-spacing: 0;
 }
 
 .card-overlay__cta {
-  font-size: 0.625rem;
-  color: var(--purple);
-  letter-spacing: 0.1em;
-}
-
-/* ── Corner brackets ── */
-.card-corner {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  opacity: 0;
-  transition: opacity var(--transition);
-  pointer-events: none;
-}
-
-.card:hover .card-corner,
-.card:focus-visible .card-corner {
-  opacity: 1;
-}
-
-.card-corner--tl {
-  top: 8px; left: 8px;
-  border-top: 1.5px solid var(--purple);
-  border-left: 1.5px solid var(--purple);
-}
-.card-corner--br {
-  bottom: 8px; right: 8px;
-  border-bottom: 1.5px solid var(--pink);
-  border-right: 1.5px solid var(--pink);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.04em;
 }
 </style>

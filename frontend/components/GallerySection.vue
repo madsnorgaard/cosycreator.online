@@ -4,12 +4,9 @@
       <!-- Section header -->
       <div class="gallery-header">
         <div class="gallery-header__left">
-          <h2 class="gallery-heading">
-            <span class="gallery-heading__label mono">WORKS</span>
-          </h2>
-          <p class="gallery-count mono">
-            {{ filteredArtworks.length }}&nbsp;
-            <span>{{ activeCategory ? 'filtered' : 'total' }}</span>
+          <h2 class="gallery-heading">works</h2>
+          <p class="gallery-count">
+            {{ filteredArtworks.length }}&nbsp;{{ activeCategory ? 'filtered' : 'total' }}
           </p>
         </div>
         <FilterBar />
@@ -17,9 +14,9 @@
 
       <!-- Empty state -->
       <div v-if="!loading && filteredArtworks.length === 0" class="gallery-empty">
-        <div class="gallery-empty__inner mono">
-          <span class="blink">▓</span>
-          <p>NO ASSETS FOUND</p>
+        <div class="gallery-empty__inner">
+          <span class="gallery-empty__icon">✦</span>
+          <p>nothing here yet</p>
           <p class="gallery-empty__sub">Upload artwork via the WP admin panel to populate the gallery.</p>
         </div>
       </div>
@@ -101,20 +98,16 @@ onMounted(() => {
 }
 
 .gallery-heading {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
   line-height: 1;
 }
 
-.gallery-heading__label {
-  font-size: 0.6875rem;
-  letter-spacing: 0.3em;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
 .gallery-count {
-  font-size: 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
   color: var(--text-dim);
-  letter-spacing: 0.1em;
 }
 
 /* ── Grid ── */
@@ -146,7 +139,7 @@ onMounted(() => {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.5) 50%,
     transparent 100%
   );
   background-size: 200% 100%;
@@ -171,14 +164,20 @@ onMounted(() => {
   align-items: center;
   gap: 12px;
   color: var(--text-muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  font-size: 0.875rem;
+  font-weight: 500;
   text-align: center;
+}
+
+.gallery-empty__icon {
+  font-size: 2rem;
+  color: var(--lavender);
+  animation: float 3s ease-in-out infinite;
 }
 
 .gallery-empty__sub {
   color: var(--text-dim);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
   max-width: 36ch;
   line-height: 1.8;
 }
