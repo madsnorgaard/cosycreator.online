@@ -1,14 +1,21 @@
 # cosycreator.online
 
-WordPress site running on Docker with Traefik reverse proxy, MySQL 8, and phpMyAdmin.
+Aurora's digital art portfolio — Nuxt 3 frontend backed by Payload CMS, running on Docker with Traefik.
 
 ## Stack
 
-- **WordPress** 6.9.1 on PHP 8.4 (Docker)
-- **MySQL** 8.4
-- **phpMyAdmin** for database management
-- **Traefik v2** for SSL termination and routing
-- **Let's Encrypt** for automatic HTTPS
+- **Nuxt 3** — SSR frontend at `cosycreator.online`
+- **Payload CMS v2** — headless CMS admin at `cms.cosycreator.online`
+- **MongoDB 7** — Payload database
+- **Traefik v2** — SSL termination and routing
+- **Let's Encrypt** — automatic HTTPS
+
+## Services
+
+| Service | URL |
+|---|---|
+| Portfolio | `https://cosycreator.online` |
+| CMS admin | `https://cms.cosycreator.online/admin` |
 
 ## Setup
 
@@ -16,7 +23,7 @@ WordPress site running on Docker with Traefik reverse proxy, MySQL 8, and phpMyA
 
 - Docker and Docker Compose installed
 - Traefik running with the `web` network: `docker network create web`
-- Domain pointing to your server
+- Domains `cosycreator.online` and `cms.cosycreator.online` pointing to your server
 
 ### 2. Configure environment
 
@@ -24,31 +31,45 @@ WordPress site running on Docker with Traefik reverse proxy, MySQL 8, and phpMyA
 cp .env.example .env
 ```
 
-Edit `.env` with your values:
+Edit `.env`:
 
 ```env
-WORDPRESS_DOMAIN=yourdomain.com
-MYSQL_ROOT_PASSWORD=secure_root_password
-MYSQL_USER=wordpress
-MYSQL_PASSWORD=secure_password
-MYSQL_DATABASE=wordpress
+SITE_DOMAIN=cosycreator.online
+PAYLOAD_SECRET=<generate with: openssl rand -base64 32>
 ```
 
 ### 3. Start
 
 ```bash
-docker compose up -d
+docker compose up -d --build
 ```
 
-WordPress will be available at `https://yourdomain.com`.
-phpMyAdmin at `https://phpmyadmin.yourdomain.com`.
+### 4. Create first admin user
 
-## wp-content
+Visit `https://cms.cosycreator.online/admin/create-first-user` — this page only appears once on first startup.
 
-The `wp-content/` directory (themes, plugins, uploads) is gitignored. Manage via the WordPress admin or deploy separately.
+## Local development
 
-## Roadmap
+### Frontend (Nuxt)
 
-This site is planned for migration to **Drupal**. The Docker infrastructure pattern will carry over - the Traefik labels and compose structure remain the same, with the application layer replaced by a Composer-managed Drupal project.
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-See [drupal.madsnorgaard.net](https://github.com/madsnorgaard/drupal.madsnorgaard.net) for the target architecture.
+Runs at `http://localhost:3000`. Set `PAYLOAD_BASE_URL=http://localhost:3001` in `frontend/.env.local`.
+
+### Backend (Payload)
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+Payload admin runs at `http://localhost:3001/admin`. Requires a local MongoDB instance (`mongodb://localhost:27017`).
+
+## Media uploads
+
+Artwork images are stored in `media/` (bind-mounted into the Payload container). This directory is gitignored — back up separately.

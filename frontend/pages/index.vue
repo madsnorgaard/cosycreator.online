@@ -8,10 +8,7 @@
     <footer class="footer section">
       <div class="footer-inner">
         <p class="mono footer-copy">
-          © {{ new Date().getFullYear() }} AURORA · COSY CREATOR
-        </p>
-        <p class="mono footer-tech">
-          <a href="/wp-admin" class="footer-wp" data-hover>WP ADMIN</a>
+          © {{ new Date().getFullYear() }} aurora · cosy creator
         </p>
       </div>
     </footer>
@@ -19,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-const { artworks, categories } = useWordPress()
+const { artworks, categories } = usePayload()
 
 // Fetch all data server-side
 const [{ data: catData }, { data: artData }] = await Promise.all([
@@ -53,25 +50,12 @@ useHead({
 .footer-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  justify-content: center;
 }
 
 .footer-copy {
   color: var(--text-dim);
   font-size: 0.625rem;
   letter-spacing: 0.1em;
-}
-
-.footer-wp {
-  color: var(--text-dim);
-  font-size: 0.625rem;
-  letter-spacing: 0.1em;
-  transition: color var(--transition);
-}
-
-.footer-wp:hover {
-  color: var(--text-muted);
 }
 </style>

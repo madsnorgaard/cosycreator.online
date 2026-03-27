@@ -8,8 +8,8 @@ export default defineNuxtConfig({
   ],
 
   runtimeConfig: {
-    // Server-only: internal Docker container name on prod, DDEV URL on local
-    wpBaseUrl: process.env.WP_BASE_URL || 'http://cosycreator.online_wordpress',
+    // Server-only: internal Docker container name on prod, Payload local URL on dev
+    payloadBaseUrl: process.env.PAYLOAD_BASE_URL || 'http://cosycreator.online_payload:3001',
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://cosycreator.online',
     },
@@ -21,7 +21,7 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'theme-color', content: '#0c0a14' },
+        { name: 'theme-color', content: '#fdf8f3' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
@@ -29,7 +29,7 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap',
+          href: 'https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap',
         },
       ],
     },

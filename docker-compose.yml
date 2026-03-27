@@ -5,68 +5,42 @@ networks:
     external: false
 
 services:
-  cosycreator_db:
-    image: mysql:8.4
-    volumes:
-      - ./wordpress.sql:/docker-entrypoint-initdb.d/init.sql # prepopulate database
-      - db_data:/var/lib/mysql
+  cosycreator_mongo:
+    image: mongo:7
+    container_name: ${SITE_DOMAIN}_mongo
     restart: always
-    env_file:
-      - .env
-    environment:
-      DOCKER_COMPOSE_YML_LOCATION: ${PWD}
-      UPLOAD_LIMIT: 300M
-    container_name: ${WORDPRESS_DOMAIN}_db
+    volumes:
+      - mongo_data:/data/db
     networks:
       - internal
     labels:
       - traefik.enable=false
 
-  cosycreator_phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.2
+  cosycreator_payload:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: cosycreator-payload:latest
+    container_name: ${SITE_DOMAIN}_payload
     restart: always
-    environment:
-      PMA_HOST: cosycreator_db
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      DOCKER_COMPOSE_YML_LOCATION: ${PWD}
-      UPLOAD_LIMIT: 300M
-    container_name: ${WORDPRESS_DOMAIN}_phpmyadmin
-    labels:
-      - traefik.http.routers.cosycreator_phpmyadmin.rule=Host(`phpmyadmin.${WORDPRESS_DOMAIN}`)
-      - traefik.http.routers.cosycreator_phpmyadmin.tls=true
-      - traefik.http.routers.cosycreator_phpmyadmin.tls.certresolver=lets-encrypt
-      - traefik.port=8080
-    networks:
-      - internal
-      - web
-    depends_on:
-      - cosycreator_db
-
-  cosycreator_wordpress:
-    depends_on:
-      - cosycreator_db
-    image: wordpress:php8.4-apache
-    restart: always
-    environment:
-      WORDPRESS_DB_HOST: cosycreator.online_db
-      WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
-      DOCKER_COMPOSE_YML_LOCATION: ${PWD}
     volumes:
-      - wp_html:/var/www/html
-      - ./wp-content:/var/www/html/wp-content
-    container_name: ${WORDPRESS_DOMAIN}_wordpress
-    # WP admin accessible at wp.cosycreator.online/wp-admin
-    # Nuxt frontend is the public face at cosycreator.online
-    labels:
-      - traefik.http.routers.cosycreator_wp_admin.rule=Host(`wp.${WORDPRESS_DOMAIN}`)
-      - traefik.http.routers.cosycreator_wp_admin.tls=true
-      - traefik.http.routers.cosycreator_wp_admin.tls.certresolver=lets-encrypt
-      - traefik.port=80
+      - ./media:/app/media
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://${SITE_DOMAIN}_mongo:27017/cosycreator
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET}
+      PAYLOAD_PUBLIC_SERVER_URL: https://cms.${SITE_DOMAIN}
+      NUXT_PUBLIC_SITE_URL: https://${SITE_DOMAIN}
+    depends_on:
+      - cosycreator_mongo
     networks:
       - internal
       - web
+    labels:
+      - traefik.http.routers.cosycreator_payload.rule=Host(`cms.${SITE_DOMAIN}`)
+      - traefik.http.routers.cosycreator_payload.tls=true
+      - traefik.http.routers.cosycreator_payload.tls.certresolver=lets-encrypt
+      - traefik.http.services.cosycreator_payload.loadbalancer.server.port=3001
 
   cosycreator_nuxt:
     build:
@@ -74,17 +48,15 @@ services:
       dockerfile: Dockerfile
     image: cosycreator-nuxt:latest
     restart: always
-    env_file:
-      - .env
     environment:
       NODE_ENV: production
-      WP_BASE_URL: http://cosycreator.online_wordpress
-      NUXT_PUBLIC_SITE_URL: https://${WORDPRESS_DOMAIN}
-    container_name: ${WORDPRESS_DOMAIN}_nuxt
+      PAYLOAD_BASE_URL: http://${SITE_DOMAIN}_payload:3001
+      NUXT_PUBLIC_SITE_URL: https://${SITE_DOMAIN}
+    container_name: ${SITE_DOMAIN}_nuxt
     depends_on:
-      - cosycreator_wordpress
+      - cosycreator_payload
     labels:
-      - traefik.http.routers.cosycreator_nuxt.rule=Host(`${WORDPRESS_DOMAIN}`) || Host(`www.${WORDPRESS_DOMAIN}`)
+      - traefik.http.routers.cosycreator_nuxt.rule=Host(`${SITE_DOMAIN}`) || Host(`www.${SITE_DOMAIN}`)
       - traefik.http.routers.cosycreator_nuxt.tls=true
       - traefik.http.routers.cosycreator_nuxt.tls.certresolver=lets-encrypt
       - traefik.http.services.cosycreator_nuxt.loadbalancer.server.port=3000
@@ -92,25 +64,5 @@ services:
       - web
       - internal
 
-  cli:
-    image: wordpress:cli-php8.4
-    container_name: ${WORDPRESS_DOMAIN}_cli
-    env_file: .env
-    environment:
-      WORDPRESS_DB_HOST: cosycreator.online_db
-      WORDPRESS_DB_USER: "${MYSQL_USER}"
-      WORDPRESS_DB_PASSWORD: "${MYSQL_PASSWORD}"
-      WORDPRESS_DB_NAME: "${MYSQL_DATABASE}"
-    volumes:
-      - wp_html:/var/www/html
-      - ./wp-content:/var/www/html/wp-content
-    networks:
-      - internal
-    depends_on:
-      - cosycreator_db
-    profiles:
-      - cli
-
 volumes:
-  db_data: {}
-  wp_html: {}
+  mongo_data: {}

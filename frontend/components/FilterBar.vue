@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-const { categories, artworks, activeCategory, setCategory } = useWordPress()
+const { categories, artworks, activeCategory, setCategory } = usePayload()
 </script>
 
 <style scoped>

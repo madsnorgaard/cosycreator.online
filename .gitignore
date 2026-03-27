@@ -1,20 +1,17 @@
 .env
 *.env
 !.env.example
-wp-content/uploads/
-wp-content/upgrade/
-wp-content/backup-db/
-wordpress.sql
 *.sql
 *.sql.gz
 db-backups/
 docker-compose.yml.save
+
 # DDEV local overrides (never commit)
 .ddev/.gitignore
 .ddev/config.*.yaml
 .ddev/.homeadditions
 
-# WordPress core (managed by ddev/wp-cli, not tracked)
+# WordPress core files (DDEV-placed, not tracked)
 wp-admin/
 wp-includes/
 wp-*.php
@@ -22,15 +19,16 @@ index.php
 xmlrpc.php
 license.txt
 readme.html
+wp-content/
+wp-config*.php
 
-# wp-content: track themes and plugins, not generated content
-wp-content/cache/
-wp-content/backup*/
-wp-content/wflogs/
-wp-content/updraft/
-wp-content/oci/
-wp-content/disabled_plugins/
-wp-content/upgrade-temp-backup/
+# Payload media uploads
+/media/
+
+# Backend build artifacts
+/backend/node_modules/
+/backend/dist/
+/backend/build/
 
 # Nuxt frontend build artifacts
 frontend/.nuxt/

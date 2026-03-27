@@ -1,17 +1,17 @@
-export interface WPCategory {
-  id: number
+export interface Category {
+  id: string
   name: string
   slug: string
   count: number
 }
 
 export interface Artwork {
-  id: number
+  id: string
   title: string
   slug: string
-  categoryIds: number[]
+  categoryIds: string[]
   imageUrl: string | null
   imageAlt: string
-  width?: number
-  height?: number
+  width?: number | null
+  height?: number | null
 }

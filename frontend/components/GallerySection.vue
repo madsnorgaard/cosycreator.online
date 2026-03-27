@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import type { Artwork } from '~/types'
 
-const { filteredArtworks, categories, activeCategory, loading } = useWordPress()
+const { filteredArtworks, categories, activeCategory, loading } = usePayload()
 
 const selectedArtwork = ref<Artwork | null>(null)
 

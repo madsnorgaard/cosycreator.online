@@ -44,11 +44,11 @@
 </template>
 
 <script setup lang="ts">
-import type { Artwork, WPCategory } from '~/types'
+import type { Artwork, Category } from '~/types'
 
 const props = defineProps<{
   artwork: Artwork | null
-  categories: WPCategory[]
+  categories: Category[]
 }>()
 
 defineEmits<{ close: [] }>()
