@@ -7,10 +7,15 @@
       <div class="hero-blob hero-blob--mint" />
     </div>
 
-    <!-- Decorative sparkles -->
-    <span class="sparkle sparkle--1" aria-hidden="true">✦</span>
-    <span class="sparkle sparkle--2" aria-hidden="true">✦</span>
-    <span class="sparkle sparkle--3" aria-hidden="true">✧</span>
+    <!-- Animated sparkle particles -->
+    <client-only>
+      <vue-particles
+        id="hero-particles"
+        class="hero-particles"
+        aria-hidden="true"
+        :options="particlesOptions"
+      />
+    </client-only>
 
     <!-- Content -->
     <div class="hero-content">
@@ -49,6 +54,51 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+const particlesOptions = {
+  fullScreen: { enable: false },
+  background: { color: 'transparent' },
+  particles: {
+    number: { value: 28, density: { enable: true } },
+    color: {
+      value: ['#c4a0e0', '#f0a5c0', '#a8d5c2', '#f5c4a0', '#a8c8e8'],
+    },
+    shape: {
+      type: 'star',
+      options: { star: { sides: 4 } },
+    },
+    opacity: {
+      value: { min: 0.25, max: 0.65 },
+      animation: { enable: true, speed: 0.4, sync: false },
+    },
+    size: {
+      value: { min: 2, max: 5 },
+      animation: { enable: true, speed: 0.8, sync: false },
+    },
+    move: {
+      enable: true,
+      speed: { min: 0.2, max: 0.7 },
+      direction: 'top',
+      straight: false,
+      outModes: 'out',
+      warp: false,
+    },
+    rotate: {
+      value: { min: 0, max: 360 },
+      animation: { enable: true, speed: 4, sync: false },
+    },
+  },
+  interactivity: {
+    events: {
+      onHover: { enable: true, mode: 'repulse' },
+    },
+    modes: {
+      repulse: { distance: 70, duration: 0.6 },
+    },
+  },
+}
+</script>
 
 <style scoped>
 .hero {
@@ -107,19 +157,19 @@
   to   { transform: translate(2%, 3%) scale(1.06); }
 }
 
-/* ── Sparkles ── */
-.sparkle {
+/* ── Particles canvas ── */
+.hero-particles {
   position: absolute;
-  color: var(--lavender);
-  font-size: 1rem;
-  pointer-events: none;
-  user-select: none;
-  animation: float 3s ease-in-out infinite;
+  inset: 0;
+  z-index: 0;
 }
 
-.sparkle--1 { top: 22%; left: 12%; font-size: 1.25rem; animation-delay: 0s; color: var(--lavender); }
-.sparkle--2 { top: 30%; right: 14%; font-size: 0.875rem; animation-delay: -1.5s; color: var(--blush); }
-.sparkle--3 { bottom: 28%; left: 22%; font-size: 0.75rem; animation-delay: -0.8s; color: var(--mint); }
+.hero-particles :deep(canvas) {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
 
 /* ── Content ── */
 .hero-content {
