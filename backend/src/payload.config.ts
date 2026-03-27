@@ -1,5 +1,4 @@
 import { buildConfig } from 'payload/config'
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import Artworks from './collections/Artworks'
 import Categories from './collections/Categories'
@@ -13,10 +12,6 @@ export default buildConfig({
     bundler: webpackBundler(),
     user: Users.slug,
   },
-
-  db: mongooseAdapter({
-    url: process.env.MONGODB_URI || 'mongodb://localhost:27017/cosycreator',
-  }),
 
   cors: [
     process.env.NUXT_PUBLIC_SITE_URL || 'https://cosycreator.online',
