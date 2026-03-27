@@ -8,6 +8,7 @@ import Users from './collections/Users'
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3001',
+  mongoURL: process.env.MONGODB_URI || 'mongodb://localhost:27017/cosycreator',
 
   editor: slateEditor({}),
 
