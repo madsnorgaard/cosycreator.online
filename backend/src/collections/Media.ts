@@ -1,3 +1,4 @@
+import path from 'path'
 import { CollectionConfig } from 'payload/types'
 
 const Media: CollectionConfig = {
@@ -7,7 +8,7 @@ const Media: CollectionConfig = {
   },
   upload: {
     staticURL: '/media',
-    staticDir: 'media',
+    staticDir: path.resolve('/app/media'),
     imageSizes: [
       { name: 'thumbnail', width: 400, height: 400, position: 'centre' },
       { name: 'large', width: 1200, height: undefined, position: 'centre' },
