@@ -5,7 +5,7 @@
 
       <div class="about-bio">
         <p class="about-label">about</p>
-        <h2 class="about-name">Aurora</h2>
+        <h2 class="about-name">Cosy Creator</h2>
         <p class="about-desc">
           Digital artist. Icons, illustrations, and game UI graphics —
           all made on iPad.

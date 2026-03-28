@@ -8,7 +8,7 @@
     <footer class="footer section">
       <div class="footer-inner">
         <p class="mono footer-copy">
-          © {{ new Date().getFullYear() }} aurora · cosy creator
+          © {{ new Date().getFullYear() }} cosy creator
         </p>
       </div>
     </footer>
@@ -32,7 +32,7 @@ useHead({
   meta: [
     {
       name: 'description',
-      content: 'Digital art studio by Aurora. Icons, illustrations, game UI and loading screens - made on iPad.',
+      content: 'Digital art studio. Icons, illustrations, game UI and loading screens - made on iPad.',
     },
     { property: 'og:title',       content: 'Cosy Creator' },
     { property: 'og:description', content: 'Digital art studio. Icons · Illustrations · Game UI.' },
