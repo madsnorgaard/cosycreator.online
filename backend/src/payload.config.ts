@@ -13,4 +13,14 @@ export default buildConfig({
   ],
 
   collections: [Artworks, Categories, Media, Users],
+
+  endpoints: [
+    {
+      path: '/health',
+      method: 'get',
+      handler: (req, res) => {
+        res.status(200).send('OK')
+      },
+    },
+  ],
 })
