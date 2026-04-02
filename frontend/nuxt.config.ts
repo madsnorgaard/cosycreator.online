@@ -23,6 +23,16 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'theme-color', content: '#fdf8f3' },
       ],
+      script: [
+        {
+          defer: true,
+          'data-domain': 'cosycreator.online',
+          src: 'https://analytics.theazanianprepper.online/js/script.file-downloads.hash.outbound-links.js',
+        },
+        {
+          innerHTML: "window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }",
+        },
+      ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -47,11 +57,11 @@ export default defineNuxtConfig({
         'Permissions-Policy':        'camera=(), microphone=(), geolocation=()',
         'Content-Security-Policy': [
           "default-src 'self'",
-          "script-src 'self' 'unsafe-inline'",
+          "script-src 'self' 'unsafe-inline' https://analytics.theazanianprepper.online",
           "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
           "font-src 'self' https://fonts.gstatic.com",
           "img-src 'self' data: https:",
-          "connect-src 'self'",
+          "connect-src 'self' https://analytics.theazanianprepper.online",
           "frame-ancestors 'none'",
         ].join('; '),
       },
