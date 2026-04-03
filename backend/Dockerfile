@@ -1,4 +1,4 @@
-FROM node:20-alpine AS builder
+FROM node:25-alpine AS builder
 WORKDIR /app
 
 ARG PAYLOAD_PUBLIC_SERVER_URL=https://cms.cosycreator.online
@@ -11,7 +11,7 @@ COPY . .
 RUN npm run build
 
 # ── Runner ──────────────────────────────────────────────────────────────────
-FROM node:20-alpine AS runner
+FROM node:25-alpine AS runner
 WORKDIR /app
 
 COPY package.json ./
