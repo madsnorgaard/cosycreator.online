@@ -5,9 +5,9 @@ Aurora's digital art portfolio — Nuxt 3 frontend backed by Payload CMS, runnin
 ## Stack
 
 - **Nuxt 3** — SSR frontend at `cosycreator.online`
-- **Payload CMS v1** — headless CMS admin at `cms.cosycreator.online`
+- **Payload CMS v2** — headless CMS admin at `cms.cosycreator.online`
 - **MongoDB 7** — Payload database
-- **Traefik v2** — SSL termination and routing
+- **Traefik v3** — SSL termination and routing
 - **Let's Encrypt** — automatic HTTPS
 
 ## Services
