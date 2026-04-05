@@ -1,0 +1,25 @@
+# Cosy Creator
+
+> Digital art studio creating icons, illustrations, game UI, and loading screens - made on iPad.
+
+## About
+
+Cosy Creator is a digital art studio specializing in hand-crafted digital assets for games, apps, and creative projects. All artwork is created on iPad using digital illustration tools. The studio produces icons, illustrations, game UI elements, and loading screens with a warm, cosy aesthetic.
+
+## Portfolio
+
+The portfolio is organized by category and showcases completed work across:
+- Icons and icon sets
+- Illustrations
+- Game UI elements
+- Loading screens and splash art
+
+## Technical Details
+
+- Built with Nuxt 3 and Payload CMS
+- Portfolio managed through a headless CMS
+- Self-hosted infrastructure
+
+## Contact
+
+- Website: https://cosycreator.online

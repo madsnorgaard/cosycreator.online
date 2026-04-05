@@ -5,7 +5,35 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/image',
     '@vueuse/nuxt',
+    '@nuxtjs/seo',
   ],
+
+  site: {
+    url: 'https://cosycreator.online',
+    name: 'Cosy Creator',
+    description: 'Digital art studio. Icons, illustrations, game UI and loading screens - made on iPad.',
+    defaultLocale: 'en',
+  },
+
+  robots: {
+    groups: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: ['/api/'],
+      },
+    ],
+  },
+
+  schemaOrg: {
+    identity: {
+      type: 'Organization',
+      name: 'Cosy Creator',
+      url: 'https://cosycreator.online',
+      logo: 'https://cosycreator.online/favicon.svg',
+      description: 'Digital art studio. Icons, illustrations, game UI and loading screens - made on iPad.',
+    },
+  },
 
   runtimeConfig: {
     // Server-only: internal Docker container name on prod, Payload local URL on dev
