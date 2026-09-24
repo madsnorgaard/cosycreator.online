@@ -39,9 +39,24 @@ services:
       - internal
       - web
     labels:
+      # Public surface of the CMS host: uploaded media (referenced by the
+      # site) and the health probe (monitoring blackbox). The Nuxt frontend
+      # reads the API over the internal network, never through this host.
+      - traefik.http.routers.cosycreator_payload_public.rule=Host(`cms.${SITE_DOMAIN}`) && (PathPrefix(`/media`) || Path(`/api/health`))
+      - traefik.http.routers.cosycreator_payload_public.priority=20
+      - traefik.http.routers.cosycreator_payload_public.tls=true
+      - traefik.http.routers.cosycreator_payload_public.tls.certresolver=lets-encrypt
+      - traefik.http.routers.cosycreator_payload_public.service=cosycreator_payload
+      # Everything else (admin UI, REST + GraphQL API, login / forgot-password /
+      # reset / unlock) is reachable from the admin IP allowlist only. Payload
+      # 1.x has unpatched pre-auth issues (account takeover, CSRF bypass, SSRF
+      # in uploads) whose only fix is the v3 migration tracked in #46.
       - traefik.http.routers.cosycreator_payload.rule=Host(`cms.${SITE_DOMAIN}`)
+      - traefik.http.routers.cosycreator_payload.priority=10
+      - traefik.http.routers.cosycreator_payload.middlewares=admin-ipallowlist@file
       - traefik.http.routers.cosycreator_payload.tls=true
       - traefik.http.routers.cosycreator_payload.tls.certresolver=lets-encrypt
+      - traefik.http.routers.cosycreator_payload.service=cosycreator_payload
       - traefik.http.services.cosycreator_payload.loadbalancer.server.port=3001
 
   cosycreator_nuxt:
