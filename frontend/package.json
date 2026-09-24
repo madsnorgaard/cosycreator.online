@@ -19,7 +19,7 @@
     "nuxt": "^3.21.11",
     "nuxt-og-image": "^6.7.8",
     "unhead": "^2.1.17",
-    "vue": "^3.5.32",
+    "vue": "^3.5.43",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
