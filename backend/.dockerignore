@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+media
+*.log
+.env
+.env.*
+# Payload 1 leftovers. The deploy rsync does not delete, so these can linger
+# in the build context on the server after the v3 migration.
+dist
+build
+src/server.ts

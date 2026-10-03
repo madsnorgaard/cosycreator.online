@@ -36,6 +36,11 @@ updates:
       interval: "weekly"
       day: "monday"
     open-pull-requests-limit: 5
+    groups:
+      # All Payload packages are pinned to one version and must move together;
+      # a partial bump breaks the backend image.
+      payload:
+        patterns: ["payload", "@payloadcms/*"]
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]

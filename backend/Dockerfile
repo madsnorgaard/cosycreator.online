@@ -1,26 +1,33 @@
-FROM node:20-alpine AS builder
+# Payload CMS v3 (Next.js host) - headless admin + API
+FROM node:26-alpine AS builder
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-ARG PAYLOAD_PUBLIC_SERVER_URL=https://cms.cosycreator.online
-ENV PAYLOAD_PUBLIC_SERVER_URL=$PAYLOAD_PUBLIC_SERVER_URL
-
-COPY package*.json ./
-RUN npm install --legacy-peer-deps
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps
 
 COPY . .
-RUN npm run build
+ENV NEXT_TELEMETRY_DISABLED=1
+# Build-time-only values: no database connection is needed to build. Scoped to
+# this RUN (no ENV), so nothing leaks into the runner; the runner gets real
+# values from the runtime environment only.
+ARG PAYLOAD_PUBLIC_SERVER_URL=http://localhost:3001
+RUN PAYLOAD_SECRET=build-only-secret \
+    MONGODB_URI=mongodb://localhost:27017/build \
+    PAYLOAD_PUBLIC_SERVER_URL=$PAYLOAD_PUBLIC_SERVER_URL \
+    npm run build
 
-# ── Runner ──────────────────────────────────────────────────────────────────
-FROM node:20-alpine AS runner
+FROM node:26-alpine AS runner
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3001
+ENV MEDIA_DIR=/app/media
 
-COPY package*.json ./
-RUN npm install --omit=dev --legacy-peer-deps
-
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/build ./build
-
+COPY --from=builder /app ./
 RUN mkdir -p /app/media
 
 EXPOSE 3001
-CMD ["node", "dist/server.js"]
+# Apply pending migrations (idempotent) before starting the server.
+CMD ["sh", "-c", "npm run migrate && npm run start"]

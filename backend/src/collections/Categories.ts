@@ -1,6 +1,6 @@
-import { CollectionConfig } from 'payload/types'
+import type { CollectionConfig } from 'payload'
 
-const Categories: CollectionConfig = {
+export const Categories: CollectionConfig = {
   slug: 'categories',
   access: {
     read: () => true,
@@ -23,5 +23,3 @@ const Categories: CollectionConfig = {
     },
   ],
 }
-
-export default Categories

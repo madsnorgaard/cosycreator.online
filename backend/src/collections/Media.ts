@@ -1,14 +1,18 @@
+import type { CollectionConfig } from 'payload'
 import path from 'path'
-import { CollectionConfig } from 'payload/types'
+import { fileURLToPath } from 'url'
 
-const Media: CollectionConfig = {
+const filename = fileURLToPath(import.meta.url)
+const dirname = path.dirname(filename)
+
+export const Media: CollectionConfig = {
   slug: 'media',
   access: {
     read: () => true,
   },
   upload: {
-    staticURL: '/media',
-    staticDir: path.resolve('/app/media'),
+    // In Docker MEDIA_DIR=/app/media (bind-mounted); locally -> <repo>/media.
+    staticDir: process.env.MEDIA_DIR || path.resolve(dirname, '../../../media'),
     imageSizes: [
       { name: 'thumbnail', width: 400, height: 400, position: 'centre' },
       { name: 'large', width: 1200, height: undefined, position: 'centre' },
@@ -24,5 +28,3 @@ const Media: CollectionConfig = {
     },
   ],
 }
-
-export default Media
