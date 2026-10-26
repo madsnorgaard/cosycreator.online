@@ -33,7 +33,8 @@
     "typescript": "5.9.3"
   },
   "overrides": {
-    "undici": "^7.29.1"
+    "undici": "^7.29.1",
+    "dompurify": "3.4.17"
   },
   "engines": {
     "node": ">=20.9.0"
