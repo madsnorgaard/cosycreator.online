@@ -11,19 +11,19 @@
   },
   "dependencies": {
     "@nuxt/image": "^2.2.0",
-    "@nuxtjs/seo": "^5.3.16",
+    "@nuxtjs/seo": "^6.0.1",
     "@tsparticles/slim": "^3.9.1",
     "@tsparticles/vue3": "^3.0.1",
-    "@unhead/vue": "^2.1.17",
+    "@unhead/vue": "^3.4.3",
     "@vueuse/nuxt": "^15.0.0",
     "nuxt": "^4.6.4",
-    "nuxt-og-image": "^6.10.4",
-    "unhead": "^2.1.17",
+    "nuxt-og-image": "^7.0.7",
+    "unhead": "^3.4.3",
     "vue": "^3.5.44",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
-    "@nuxt/devtools": "latest",
+    "@nuxt/devtools": "^4.1.0",
     "typescript": "^5.5.0"
   }
 }
