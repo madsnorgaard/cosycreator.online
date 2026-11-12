@@ -19,7 +19,7 @@
     "@payloadcms/db-mongodb": "3.93.0",
     "@payloadcms/next": "3.93.0",
     "@payloadcms/ui": "3.93.0",
-    "graphql": "^16.11.0",
+    "graphql": "^16.15.0",
     "next": "16.4.5",
     "payload": "3.93.0",
     "react": "^19.3.0",
