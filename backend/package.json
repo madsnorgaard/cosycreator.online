@@ -34,7 +34,8 @@
   },
   "overrides": {
     "undici": "^7.29.1",
-    "dompurify": "3.4.17"
+    "dompurify": "3.4.17",
+    "mongoose": "8.24.7"
   },
   "engines": {
     "node": ">=20.9.0"
